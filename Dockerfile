@@ -1,4 +1,4 @@
-FROM linkedin/datahub:3.8.2  # Replace with the appropriate version or tag
+FROM linkedin/datahub:3.8.2
 
 # Set the necessary environment variables
 ENV GMS_HOST=localhost \
@@ -14,5 +14,3 @@ EXPOSE 9002
 
 # (Optional) Start DataHub
 CMD ["datahub", "docker", "quickstart"]
-
-
