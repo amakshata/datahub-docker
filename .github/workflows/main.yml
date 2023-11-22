@@ -33,14 +33,6 @@ jobs:
     - name: Build DataHub Docker image
       run: docker build -t my-datahub-image -f ./Dockerfile .
 
-    - name: Run DataHub container
+    - name: Build and start DataHub containers
       run: |
-        docker run -d \
-          -p 9002:9002 \
-          -e GMS_HOST=localhost \
-          -e GMS_PORT=9002 \
-          -e ELASTICSEARCH_HOST=localhost \
-          -e ELASTICSEARCH_PORT=9200 \
-          -e KAFKA_BOOTSTRAP_SERVERS=localhost:9092 \
-          --name my-datahub-container \
-          my-datahub-image
+        docker-compose -f docker-compose.yml up -d
