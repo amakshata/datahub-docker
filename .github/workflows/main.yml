@@ -31,7 +31,7 @@ jobs:
         sudo systemctl enable docker
 
     - name: Build DataHub Docker image
-      run: docker build -t my-datahub-image -f .github/workflows/Dockerfile .
+      run: docker build -t my-datahub-image -f ./Dockerfile .
 
     - name: Run DataHub container
       run: |
