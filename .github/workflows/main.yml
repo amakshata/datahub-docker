@@ -23,6 +23,19 @@ jobs:
     - name: Login to Amazon ECR
       uses: aws-actions/amazon-ecr-login@v1
 
+    - name: Deploy to EC2
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.EC2_HOST }}
+        username: ${{ secrets.EC2_USERNAME }}
+        key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+        port: ${{ secrets.EC2_SSH_PORT }}
+        script: |
+          ssh -o StrictHostKeyChecking=no -i ${{ secrets.EC2_SSH_PRIVATE_KEY }} ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} 'bash -s' << 'EOF'
+            cd ./docker-compose.yaml  # Change to the directory where your docker-compose.yml is located
+            docker-compose up -d
+          EOF
+
     - name: Install Docker
       run: |
         sudo apt-get update
@@ -35,4 +48,4 @@ jobs:
 
     - name: Build and start DataHub containers
       run: |
-        docker-compose -f docker-compose.yml up -d
+        docker-compose -f docker-compose.yaml up -d
