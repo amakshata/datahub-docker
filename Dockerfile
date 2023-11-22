@@ -1,4 +1,3 @@
-# Use an official LinkedIn DataHub image as the base image
 FROM linkedin/datahub:3.8.2  # Replace with the appropriate version or tag
 
 # Set the necessary environment variables
