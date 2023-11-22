@@ -1,26 +1,26 @@
 version: '3.7'
 
 services:
-datahub:
+  datahub:
     image: linkedin/datahub:gma-2.3.1-v1
     ports:
       - "9002:9002"
     environment:
       - GMS_HOST=localhost
       - GMS_PORT=9002
-      - ELASTICSEARCH_HOST=localhost
+      - ELASTICSEARCH_HOST=elasticsearch
       - ELASTICSEARCH_PORT=9200
-      - KAFKA_BOOTSTRAP_SERVERS=localhost:9092
+      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
     depends_on:
       - elasticsearch
       - kafka
 
-elasticsearch:
+  elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.17.1
     environment:
       - discovery.type=single-node
 
-kafka:
+  kafka:
     image: wurstmeister/kafka:2.12-2.5.0
     ports:
       - "9092:9092"
@@ -33,5 +33,5 @@ kafka:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
 
-    zookeeper:
+  zookeeper:
     image: wurstmeister/zookeeper:3.4.6
