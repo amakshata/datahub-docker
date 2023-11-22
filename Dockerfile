@@ -1,4 +1,4 @@
-FROM linkedin/datahub:3.8.2
+FROM linkedin/datahub:debug
 
 # Set the necessary environment variables
 ENV GMS_HOST=localhost \
